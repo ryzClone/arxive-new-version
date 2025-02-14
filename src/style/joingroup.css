@@ -1,0 +1,419 @@
+.join-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 20px;
+}
+.join-group-header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.join-group-header-title{
+    font-size: 24px;
+    font-family: "-apple-system";
+    margin: 8px 0px;
+    color: #212529;
+}
+.join-group-header-btn{
+    background-color: #1890ff;
+    font-size: 14px;
+    padding: 8px 16px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+.join-group-header-btn:hover{
+  transform: scale(1.1);
+}
+/* section ######################################################################### */
+.join-group-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.join-group-section table th {
+  background-color: #0c2b49;
+  padding: 12px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.join-group-section table td {
+  padding: 12px;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.join-group-section table tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+.join-group-section table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.join-group-section table tr:hover {
+  background-color: #d0e3ff;
+}
+
+.join-group-section table .tbody-ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0px;
+}
+
+.join-group-section table .tbody-ul li {
+  list-style: none;
+  padding: 5px 10px;
+  color: #000;
+  border-radius: 4px;
+  border: 1px solid rgb(160, 157, 157);
+  cursor: pointer;
+  background-color: #f3f3f3;
+  transition: all 0.3s ease;
+}
+
+.join-group-section table .tbody-ul li:hover {
+  background-color: #0c2b49;
+  color: #fff;
+  border-color: #0c2b49;
+}
+
+.join-group-section table .Table-tbody .tr-tbody td {
+  padding: 12px;
+}
+
+.join-group-table-tbody-btn .blue{
+  margin-right: 5px;
+  border: none;
+  background-color:#1890ff;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+.join-group-table-tbody-btn .red{
+  margin-right: 10px;
+  border: none;
+  background-color: #a30041;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+
+  .join-group-table-tbody-img{
+    width: 20px;
+    height: 20px;
+  }
+  .tbody-th-select{
+    width: 65%;
+  }
+  /* Pagenation - Yaxshilangan uslub */
+.Slide {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  list-style: none;
+}
+
+.slide-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-collapse: collapse;
+}
+
+.sortBtn {
+  color: #343a40;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.sortBtn:hover {
+  background-color: #0c2b49;
+  color: white;
+  border-color: #0c2b49;
+}
+
+.sortBasc {
+  background-color: #0c2b49;
+  border-color: #0c2b49;
+  color: #fff;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.sortBasc:hover {
+  background-color: #082037;
+}
+
+.colorRed {
+  color: #082037;
+  font-weight: bold;
+}
+
+.sortBtnList {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 4px 10px;
+  position: relative;
+}
+
+.select-selected {
+  color: #333333;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.select-items {
+  position: absolute;
+  display: none;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 1;
+  width: 100%;
+  top: 100%;
+  right: 0;
+  border: 1px solid #e0e0e0;
+}
+
+.select-items div {
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
+  color: #333;
+}
+
+.select-items div:hover {
+  background-color: #0c2b49; /* Ko'k rang */
+  color: #fff; /* Matn oq rang */
+  border-radius: 4px;
+}
+
+.sortBtnList.active .select-items {
+  display: block;
+}
+
+
+
+  .readUserSrcUpdate{
+    width: 30px;
+    height: 30px;
+    background-color: #1890ff;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  .readUserSrcUpdate:hover{
+    transform: scale(1.1);
+  }
+
+  .readUserSrcDelete{
+    width: 30px;
+    height: 30px;
+    background-color: #a30041;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 5px;
+    transition: all 0.3s ease;
+    color: #0c2b49;
+  }
+  .readUserSrcDelete:hover{
+    transform: scale(1.1);
+  }
+  .readUserSrcBody{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+  }
+  .readUserBtn{
+    border: none;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .join-group-table-center{
+    width: 10%;
+  }
+  .join-group-header-body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .join-group-header-body-form{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 20px 0px;
+  }
+
+  .modalDelete{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: #343a40;
+    opacity: 40%;
+  }
+  .modal-delete-body{
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 100%;
+    z-index: 5;
+  }
+  .formModalBtn{
+    display: none;
+    width: 500px;
+    border: 1px solid #fff;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .formModalBtn-inputs{
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .formModalBtn-inputs-label{
+    min-width: 32%;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .formModalBtn-inputs-item{
+    width: 78%;
+    padding: 9px 0px 10px 10px;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 3px;
+  }
+  .formModalBtn-inputs-item:focus{
+    outline: none;
+    border:1px solid #0c2b49;
+  }
+  .formModalBtn-inputs-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .formModalBtn-inputs-btn-item-blue{
+    background-color: #0c2b49;
+    border: 1px solid #0c2b49;
+    color: #fff;
+    padding: 10px 80px;
+    margin-top: 20px;
+    border-radius: 3px;
+  }
+
+  .formModalBtn-inputs-btn-item-red{
+    background-color: #70c1b2;
+    border: 1px solid #70c1b2;
+    color: #fff;
+    padding: 10px 80px;
+    margin-top: 20px;
+    border-radius: 3px;
+  }
+  .formModalBtn h1{
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 10px 0px;
+  }
+  .formModalDelete{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+  }
+  .formModalDelete-forms{
+    width: 300px;
+    height: 100px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 3px;
+    margin-top: 20px;
+    padding: 20px;
+  }
+  .formModalDelete-title{
+    font-size: 18px;
+  }
+  .formModalDelete-btn-body{
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+  }
+  .formModalDelete-btn-body-btn{
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 5px;
+  }
+  .green {
+    border: 1px solid green;
+    background-color: green;
+    cursor: pointer;
+  }
+
+  .red {
+    border: 1px solid #a30041;
+    background-color: #a30041;
+    cursor: pointer;
+  }

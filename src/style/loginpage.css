@@ -1,0 +1,122 @@
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    background: url("../img/login/fon1.jpg") 100% 100% no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.wrapperOpacity{
+    width: 100%;
+    height: 100%;
+    background: url("../img/login/opacity.png"), lightgray 0% 0% / 100px 100px repeat;
+    opacity: 35%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.card-item{
+    width: 50%;
+    position: absolute;
+    z-index: 3;
+    padding: 30px 40px;
+    margin-right: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-opacity{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(117deg, rgba(255, 255, 255, 0.22) -0.3%, rgba(255, 255, 255, 0.20) 50%);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 4px solid rgba(255, 255, 255, 0.76);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 80%;
+}
+.form{
+    opacity: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
+    color: white;
+}
+.title{
+    color: #FFF;
+    font-family: "Poppins";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.input{
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.42);
+    color: white;
+    background-color: inherit;
+    font-family: "Poppins";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 12px 0px 12px 21px;
+    width: 100%;
+}
+.input:focus{
+    outline: none;
+}
+.input::placeholder{
+    color: #ccc7c7;
+    opacity: 1;
+}
+
+.Img{
+    border-radius: 25px;
+    width: 50%;
+    height: 90%;
+    z-index: 2;
+}
+.submit{
+    border-radius: 5px;
+    background: #a8a4a4;
+    backdrop-filter: blur(20px);
+    border: none;
+    padding: 12px 21px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-top: 50px;
+}
+.eyeInput{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.submit:hover{
+    opacity: 80%;
+}
+.eyeImg{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+}
