@@ -111,7 +111,7 @@ export default class LoginPage extends React.Component {
         <div className="card-item">
           <div className="card-opacity"></div>
           <form action="" className="form" onSubmit={this.handleSubmit}>
-            <h1 className="title">Welcome </h1>
+            <h1 className="title">Login </h1>
             <input
               type="text"
               placeholder="Login"
