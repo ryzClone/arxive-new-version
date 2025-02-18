@@ -122,9 +122,6 @@
     margin-top: 50px;
 }
 
-.table-tr-withPermission{
-    border: 1px solid #c1c1c1;
-}
 .table-th-withPermission{
     width: 50px;
 }
@@ -134,8 +131,6 @@
 .table-tr-withPermission:hover{
     opacity: 80%;
     cursor: pointer;
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
 }
 
 /* download icon */
