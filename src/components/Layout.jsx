@@ -5,7 +5,6 @@ import Logo from "../img/section/logo1.ico";
 import Transfer from "../png/section/aside/transfer.png";
 import Home from "../png/section/aside/home.png";
 import AddUser from "../png/section/aside/addUser.png";
-import LogOut from "../png/section/aside/logOut.png";
 import Eng from "../png/section/aside/Eng.png";
 import Rus from "../png/section/aside/rus.png";
 import Uzb from "../png/section/aside/uzb.png";
@@ -15,6 +14,7 @@ import Service from "../png/section/aside/service.png";
 import History from "../png/section/aside/history.png";
 import search from "../png/section/aside/search-black.png";
 import contracts from "../png/section/aside/document-files.png";
+
 
 // FontAwesome ikonkalarini import qilamiz
 import { FaUserCircle } from "react-icons/fa";
@@ -27,7 +27,7 @@ class Layout extends Component {
       hamburger: "flex",
       isDisplayed: false,
       language: Eng,
-      activeLink: "/home", // Track the active link
+      activeLink: window.location.pathname,
       profileDropdown: false, // Profile dropdownni boshqarish
       languageDropdown: false,
     };
@@ -36,7 +36,7 @@ class Layout extends Component {
     this.languageDropdownRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
-
+  
   handleInputChange = (e) => {
     this.setState({ searchText: e.target.value });
   };
@@ -131,6 +131,7 @@ class Layout extends Component {
   setActiveLink = (link) => {
     this.setState({ activeLink: link });
   };
+  
 
   render() {
     const { profileDropdown, activeLink, languageDropdown } =

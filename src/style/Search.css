@@ -30,6 +30,6 @@
     flex: 1 1 100%;
 }
 #demo p:hover{
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #0c2b49;
     color: #fff;
 }

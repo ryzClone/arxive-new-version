@@ -193,6 +193,10 @@
   color: #333333;
   padding: 5px 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .select-items {
@@ -338,7 +342,6 @@
   }
   .formModalBtn-inputs-item:focus{
     outline: none;
-    border:1px solid #0c2b49;
   }
   .formModalBtn-inputs-btn{
     width: 100%;
@@ -350,19 +353,28 @@
   .formModalBtn-inputs-btn-item-blue{
     background-color: #0c2b49;
     border: 1px solid #0c2b49;
+    cursor: pointer;
     color: #fff;
     padding: 10px 80px;
     margin-top: 20px;
     border-radius: 3px;
+    transition: all 0.3s ease;
   }
-
+  .formModalBtn-inputs-btn-item-blue:hover{
+    transform: scale(1.1);
+  }
   .formModalBtn-inputs-btn-item-red{
     background-color: #70c1b2;
     border: 1px solid #70c1b2;
+    cursor: pointer;
     color: #fff;
     padding: 10px 80px;
     margin-top: 20px;
+    transition: all 0.3s ease;
     border-radius: 3px;
+  }
+  .formModalBtn-inputs-btn-item-red:hover{
+    transform: scale(1.1);
   }
   .formModalBtn h1{
     font-size: 36px;
@@ -388,7 +400,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border-radius: 3px;
+    border-radius: 10px;
     margin-top: 20px;
     padding: 20px;
   }
@@ -405,15 +417,21 @@
     font-size: 14px;
     color: #fff;
     border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  .formModalDelete-btn-body-btn .green{
+  transform: scale(1.1);  
   }
   .green {
-    border: 1px solid green;
-    background-color: green;
+    border: 1px solid #70c1b2;
+    background-color: #70c1b2;
     cursor: pointer;
+    transform: scale(1.1);
   }
 
   .red {
-    border: 1px solid #a30041;
-    background-color: #a30041;
+    border: 1px solid #0c2b49;
+    background-color: #0c2b49;
+    transform: scale(1.1);
     cursor: pointer;
   }

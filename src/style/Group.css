@@ -68,19 +68,17 @@
     gap: 7px;
 }
 .group-input{
-    padding: 11px 0px 10px 2px;
+    padding: 11px 0px 10px 8px;
     min-width: 197.3px;
-    border-radius: 3px;
+    border-radius: 7px;
     border: 1px solid hsl(0, 0%, 80%);
 }
-.group-input:focus{
-    background-color: #fff;
-}
 .group-input-select{
-    padding: 5px 0px 5px 2px;
+    padding: 5px 10px 5px 2px;
     width: 200;
 }
 .group-input:focus{
+    padding-left: 5px;
     outline: none;
 }
 .group-btn{
@@ -91,7 +89,11 @@
     background-color: #1890ff;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
     border-radius: 3px;
+}
+.group-btn:hover{
+    transform: scale(1.1);
 }
 .group-close{
     display: block;
@@ -100,7 +102,11 @@
     padding: 5px;
     cursor: pointer;
     border-radius: 3px;
-    background-color: #f02d47;
+    background-color: #a30041;
+    transition: all 0.3s ease;
+}
+.group-close:hover{
+    transform: scale(1.1);
 }
 .input-body-items{
     display: flex;
@@ -128,7 +134,8 @@
 .table-tr-withPermission:hover{
     opacity: 80%;
     cursor: pointer;
-    border: 1px solid #333;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
 }
 
 /* download icon */

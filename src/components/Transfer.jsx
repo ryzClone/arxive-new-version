@@ -3,8 +3,12 @@ import "../style/transfer.css";
 import Select from "react-select";
 import Success from "./SucsesFull";
 import { BASE_URL } from "./base_url.jsx";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const services = [];
 const groups = [];
@@ -28,10 +32,17 @@ class Transfer extends Component {
 
       startDate: new Date(),
       endDate: new Date(),
+
+      startDate: dayjs(),
+      endDate: dayjs(),
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
+  handleDateChange = (key, newValue) => {
+    this.setState({ [key]: newValue });
+  };
 
   handleSubmit(event) {
     event.preventDefault();
@@ -302,39 +313,37 @@ class Transfer extends Component {
                 </div>
               </label>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <label htmlFor="" className="form-label">
-                  Begin date
-                  <DatePicker
-                    name="BeginDate"
-                    dateFormat="yyyy/MM/dd h:mm aa"
-                    selected={this.state.startDate}
-                    onChange={(date) =>
-                      this.selectDateHandler(date, "startDate")
-                    }
-                    todayButton={"Today"}
-                    className="DatePicker"
-                  />
-                </label>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <label style={{ marginBottom: "8px" }}>Begin date</label>
+                    <DatePicker
+                      value={this.state.startDate}
+                      onChange={(newValue) =>
+                        this.handleDateChange("startDate", newValue)
+                      }
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </div>
 
-                <label htmlFor="" className="form-label">
-                  End date
-                  <DatePicker
-                    name="endDate"
-                    dateFormat="yyyy/MM/dd h:mm aa"
-                    selected={this.state.endDate}
-                    onChange={(date) => this.selectDateHandler(date, "endDate")}
-                    todayButton={"Today"}
-                    className="DatePicker"
-                  />
-                </label>
-              </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <label style={{ marginBottom: "8px" }}>End date</label>
+                    <DatePicker
+                      value={this.state.endDate}
+                      onChange={(newValue) =>
+                        this.handleDateChange("endDate", newValue)
+                      }
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </div>
+                </div>
+              </LocalizationProvider>
 
               <div className="errorSelect"></div>
             </div>

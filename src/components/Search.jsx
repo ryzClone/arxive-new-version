@@ -52,6 +52,8 @@ export default function Search() {
     const Viewdata = (data) => {
         const Demo = document.getElementById('demo');
         Demo.innerHTML = " ";
+        console.log(data);
+        
 
         if (data.data === null) {
             Demo.style.color = "red";

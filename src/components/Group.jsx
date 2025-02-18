@@ -8,6 +8,7 @@ import FilterClose from "../png/section/aside/whiteClose.png";
 import Update from "../png/section/aside/update.png";
 import Delete from "../png/section/aside/delete.png";
 import {BASE_URL} from "./base_url.jsx"
+import { FaChevronDown, FaChevronUp } from "react-icons/fa" 
 
 const Group = () => {
   const [sort, setSort] = useState(1);
@@ -25,6 +26,8 @@ const Group = () => {
   const [selectedServiceList, setSelectedServiceList] = useState([]);
 
   const [FilterName , setFilterName] = useState('');
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const dubleSortMin = () => {
     if (sort >= 3) {
@@ -200,11 +203,6 @@ const Group = () => {
     }
   }, [sort, DubleList , FilterName]);
 
-  const SortBtnList = (e) => {
-    setDubleList(e.target.value);
-    setSort(1);
-  };
-
   const OffUpdateModal = () => {
     setGropname('');
     document.getElementById('modalDelete').style.display = "none";
@@ -319,6 +317,18 @@ const Group = () => {
     setSelectedServiceList(users);
   };
 
+  const handleSelect = (event, value) => {
+    setDubleList(value);
+    setSort(1);
+    setIsOpen(true);
+  };
+  
+  const toggleDropdown = () => {
+    const dropdown = document.querySelector('.sortBtnList');
+    dropdown.classList.toggle('active');
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="join-group">
 
@@ -348,23 +358,41 @@ const Group = () => {
         </form>
       </div>
 
-      <div className="Slide">
-        <div className="slide-menu">
-          <div className="sortBtn cursor" onClick={dubleSortMin}>{'<<'}</div>
-          <div className="sortBtn cursor" onClick={sortMin}> {'<'} </div>
-          <li className="sortBasc sortBtn">{sort}</li>
-          <div className="sortBtn cursor" onClick={sortMax}> {'>'} </div>
-          <div className="sortBtn cursor" onClick={dubleSortMax}> {'>>'} </div>
+    <div className="Slide">
+          <div className="slide-menu">
+            <div className="sortBtn cursor" onClick={dubleSortMin}>
+              {"<<"}
+            </div>
+
+            <div className="sortBtn cursor" onClick={sortMin}>
+              {"<"}
+            </div>
+
+            <li className="sortBasc sortBtn">{sort}</li>
+
+            <div className="sortBtn cursor" onClick={sortMax}>
+              {">"}
+            </div>
+
+            <div className="sortBtn cursor" onClick={dubleSortMax}>
+              {">>"}
+            </div>
+          </div>
+
+          <div className="sortBtnList" onClick={toggleDropdown}>
+            <div className="select-selected">
+              {DubleList || 25} 
+              {isOpen ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
+            </div>
+            <div className="select-items">
+              <div onClick={(event) => handleSelect(event, 25)}>25</div>
+              <div onClick={(event) => handleSelect(event, 100)}>100</div>
+              <div onClick={(event) => handleSelect(event, 200)}>200</div>
+            </div>
+          </div>
+
+          <div className="sortBtn colorRed">All count: {list}</div>
         </div>
-        <div className="sortBtnList">
-          <select id="cars" onChange={SortBtnList}>
-            <option value={15} className="sortBtnList">15</option>
-            <option value={25} className="sortBtnList">25</option>
-            <option value={50} className="sortBtnList">50</option>
-          </select>
-        </div>
-        <div className="sortBtn colorRed">All count : {list}</div>
-      </div>
 
       <div className="join-group-section">
         <table>

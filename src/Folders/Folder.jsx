@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../style/Group.css";
 import { BASE_URL } from "../components/base_url";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa" 
 
 class Folders extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Folders extends Component {
       list: 50,
       DubleList: 25,
       formDisplay: false,
+      isOpen: false,
     };
 
     this.dubleSortMin = this.dubleSortMin.bind(this);
@@ -21,6 +23,8 @@ class Folders extends Component {
     this.WithPermission = this.WithPermission.bind(this);
     this.TableBackUser = this.TableBackUser.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
 
@@ -144,11 +148,13 @@ class Folders extends Component {
         this.WithPermission();
       }
     );
+    this.setState({ DubleList: value, isOpen: true });
   };
   
   toggleDropdown = () => {
     const dropdown = document.querySelector('.sortBtnList');
     dropdown.classList.toggle('active');
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   };
   
 
@@ -182,7 +188,8 @@ class Folders extends Component {
 
           <div className="sortBtnList" onClick={this.toggleDropdown}>
             <div className="select-selected">
-              {this.state.DubleList || 25} {/* Dastlabki qiymat 15 */}
+              {this.state.DubleList || 25} 
+              {this.state.isOpen ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
             </div>
             <div className="select-items">
               <div onClick={(event) => this.handleSelect(event, 25)}>25</div>

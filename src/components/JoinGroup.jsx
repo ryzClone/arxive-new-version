@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../style/joingroup.css";
 import { Link } from "react-router-dom";
-import Select from 'react-select';
+import Select from "react-select";
 import Success from "./SucsesFull";
 import FilterImg from "../png/section/aside/white-filter.png";
 import FilterClose from "../png/section/aside/whiteClose.png";
 import Update from "../png/section/aside/update.png";
 import Delete from "../png/section/aside/delete.png";
-import {BASE_URL} from "./base_url.jsx"
+import { BASE_URL } from "./base_url.jsx";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Group = () => {
   const [sort, setSort] = useState(1);
@@ -15,16 +16,17 @@ const Group = () => {
   const [DubleList, setDubleList] = useState(15);
   const [Display, setDisplay] = useState(false);
 
-  const [Groupname, setGropname] = useState('');
+  const [Groupname, setGropname] = useState("");
   const [Id, setId] = useState(null);
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [success, setSuccess] = useState(false);
   const [userMap, setUsermap] = useState([]);
   const [selectedServiceList, setSelectedServiceList] = useState([]);
 
-  const [FilterName , setFilterName] = useState('')
+  const [FilterName, setFilterName] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const dubleSortMin = () => {
     if (sort >= 3) {
@@ -71,7 +73,9 @@ const Group = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setList(data.data.count)
+        console.log(data);
+        
+        setList(data.data.count);
         TableBackUser(data.data.list);
       })
       .catch((error) => {
@@ -84,42 +88,43 @@ const Group = () => {
   };
 
   const TableBackUser = (data) => {
-    let Tbody = document.querySelector('.Table-tbody');
-    Tbody.innerHTML = '';
+    let Tbody = document.querySelector(".Table-tbody");
+    Tbody.innerHTML = "";
 
     data.forEach((element) => {
-      let tr = document.createElement('tr');
+      let tr = document.createElement("tr");
 
-      let tdId = document.createElement('td');
+      let tdId = document.createElement("td");
       tdId.innerHTML = element.index;
       tr.appendChild(tdId);
 
-      let tdUsername = document.createElement('td');
+      let tdUsername = document.createElement("td");
       tdUsername.innerHTML = element.userName;
       tr.appendChild(tdUsername);
 
-      let tdGroupname = document.createElement('td');
-      let tdGroupnameUl = document.createElement('ul');
+      let tdGroupname = document.createElement("td");
+      let tdGroupnameUl = document.createElement("ul");
       tdGroupname.className = "tbody-th-select";
       tdGroupnameUl.className = "tbody-ul";
-
-      if (element.groupList.length >= 1) {
-        element.groupList.forEach((el) => {
-          const tdGroupnameLi = document.createElement('li');
+      
+      if (element.grouplist && element.grouplist.length >= 1) {
+        element.grouplist.forEach((el) => {
+          const tdGroupnameLi = document.createElement("li");
           tdGroupnameLi.innerHTML = el.name;
           tdGroupnameUl.appendChild(tdGroupnameLi);
         });
       }
+      
 
       tdGroupname.appendChild(tdGroupnameUl);
       tr.appendChild(tdGroupname);
 
-      let tdBtn = document.createElement('td');
+      let tdBtn = document.createElement("td");
       tdBtn.className = "readUserSrcBody";
-      let Updates = document.createElement('button');
-      let Deletes = document.createElement('button');
-      let imgUpdate = document.createElement('img');
-      let imgDelete = document.createElement('img');
+      let Updates = document.createElement("button");
+      let Deletes = document.createElement("button");
+      let imgUpdate = document.createElement("img");
+      let imgDelete = document.createElement("img");
       Updates.className = "readUserBtn";
       Deletes.className = "readUserBtn";
       imgUpdate.className = "readUserSrcUpdate";
@@ -131,8 +136,7 @@ const Group = () => {
       Updates.appendChild(imgUpdate);
       Deletes.appendChild(imgDelete);
 
-      Updates.addEventListener('click', () => {
-
+      Updates.addEventListener("click", () => {
         fetch(`${BASE_URL}/user/group/select/${element.id}`, {
           method: "GET",
           headers: {
@@ -155,27 +159,32 @@ const Group = () => {
             }));
 
             setUsermap((prevUserMap) => [...prevUserMap, ...newServiceList]);
-            setSelectedServiceList((existList) => [...existList, ...newExistList]);
+            setSelectedServiceList((existList) => [
+              ...existList,
+              ...newExistList,
+            ]);
           })
           .catch((error) => {
             console.error("Xatolik yuz berdi:", error);
           });
 
-        document.getElementById('modalDelete').style.display = "flex";
-        document.getElementById('formModalBtn').style.display = "flex";
-        document.getElementById('modal-delete-body').style.display = "flex";
-        document.querySelector('.join-group-header-body-form').style.display = "none";
-        document.getElementById('formModalDelete').style.display = "none";
+        document.getElementById("modalDelete").style.display = "flex";
+        document.getElementById("formModalBtn").style.display = "flex";
+        document.getElementById("modal-delete-body").style.display = "flex";
+        document.querySelector(".join-group-header-body-form").style.display =
+          "none";
+        document.getElementById("formModalDelete").style.display = "none";
         setId(element.id);
         setGropname(element.userName);
       });
 
-      Deletes.addEventListener('click', () => {
-        document.getElementById('modalDelete').style.display = "flex";
-        document.getElementById('formModalBtn').style.display = "none";
-        document.getElementById('modal-delete-body').style.display = "flex";
-        document.querySelector('.join-group-header-body-form').style.display = "none";
-        document.getElementById('formModalDelete').style.display = "flex";
+      Deletes.addEventListener("click", () => {
+        document.getElementById("modalDelete").style.display = "flex";
+        document.getElementById("formModalBtn").style.display = "none";
+        document.getElementById("modal-delete-body").style.display = "flex";
+        document.querySelector(".join-group-header-body-form").style.display =
+          "none";
+        document.getElementById("formModalDelete").style.display = "flex";
         setId(element.id);
       });
 
@@ -188,28 +197,23 @@ const Group = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('Role') === "ROLE_USER") {
-      window.location.pathname = '/home'
+    if (localStorage.getItem("Role") === "ROLE_USER") {
+      window.location.pathname = "/home";
     } else {
       sayt();
     }
-  }, [sort, DubleList , FilterName]);
-
-  const SortBtnList = (e) => {
-    setDubleList(e.target.value);
-    setSort(1);
-  };
+  }, [sort, DubleList, FilterName]);
 
   const OffUpdateModal = () => {
-    setGropname('');
-    document.getElementById('modalDelete').style.display = "none";
-    document.getElementById('modal-delete-body').style.display = "none";
-    document.getElementById('formModalBtn').style.display = "none";
-  }
+    setGropname("");
+    document.getElementById("modalDelete").style.display = "none";
+    document.getElementById("modal-delete-body").style.display = "none";
+    document.getElementById("formModalBtn").style.display = "none";
+  };
 
   const modalFormClick = (e) => {
     e.preventDefault();
-  }
+  };
 
   const sendUpdateModal = () => {
     setTimeout(() => {
@@ -243,13 +247,14 @@ const Group = () => {
         console.error("Xatolik yuz berdi:", error);
       });
 
-    setGropname('');
-    document.getElementById('modalDelete').style.display = "none";
-    document.getElementById('formModalBtn').style.display = "none";
-    document.getElementById('modal-delete-body').style.display = "none";
-    document.querySelector('.join-group-header-body-form').style.display = "none";
-    document.getElementById('formModalDelete').style.display = "none";
-  }
+    setGropname("");
+    document.getElementById("modalDelete").style.display = "none";
+    document.getElementById("formModalBtn").style.display = "none";
+    document.getElementById("modal-delete-body").style.display = "none";
+    document.querySelector(".join-group-header-body-form").style.display =
+      "none";
+    document.getElementById("formModalDelete").style.display = "none";
+  };
 
   const DeleteUser = () => {
     setTimeout(() => {
@@ -275,67 +280,105 @@ const Group = () => {
         console.error("Xatolik yuz berdi:", error);
       });
 
-    document.getElementById('modalDelete').style.display = "none";
-    document.getElementById('formModalBtn').style.display = "none";
-    document.getElementById('modal-delete-body').style.display = "none";
-    document.querySelector('.join-group-header-body-form').style.display = "none";
-    document.getElementById('formModalDelete').style.display = "none";
-  }
+    document.getElementById("modalDelete").style.display = "none";
+    document.getElementById("formModalBtn").style.display = "none";
+    document.getElementById("modal-delete-body").style.display = "none";
+    document.querySelector(".join-group-header-body-form").style.display =
+      "none";
+    document.getElementById("formModalDelete").style.display = "none";
+  };
 
   const renderSuccessMessage = () => {
     if (showSuccess) {
-      return (
-        <Success title={text} background={success} />
-      );
+      return <Success title={text} background={success} />;
     }
-  }
+  };
 
   const formFiltre = () => {
-    setGropname('');
+    setGropname("");
     setDisplay(!Display);
-  }
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   const handleFormSubmites = () => {
     setSort(1);
     sayt();
-  }
+  };
 
   const handleFormClear = () => {
-    setGropname('');
+    setGropname("");
     setFilterName(Groupname);
-  }
+  };
 
   const handleStatusChangeUsers = (users) => {
     setSelectedServiceList(users);
   };
 
+  const handleSelect = (event, value) => {
+    setDubleList(value);
+    setSort(1);
+    setIsOpen(true);
+  };
+
+  const toggleDropdown = () => {
+    const dropdown = document.querySelector(".sortBtnList");
+    dropdown.classList.toggle("active");
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="join-group">
-
       <div className="join-group-header">
         <div className="join-group-header-body">
-          <div className="join-group-header-title">
-            Join Group
-          </div>
+          <div className="join-group-header-title">Join Group</div>
           <div className="group-main-items">
-            <button className="group-main-item-list3" onClick={formFiltre}>Filter</button>
-            <Link to="/home/joingroup/adduserjoin" className="join-group-header-btn" title="Transfer"> Add User to Group </Link>
+            <button className="group-main-item-list3" onClick={formFiltre}>
+              Filter
+            </button>
+            <Link
+              to="/home/joingroup/adduserjoin"
+              className="join-group-header-btn"
+              title="Transfer"
+            >
+              {" "}
+              Add User to Group{" "}
+            </Link>
           </div>
         </div>
-        <form action="" className="join-group-header-body-form" style={{ display: Display ? "flex" : "none" }} onClick={handleFormSubmit}>
+        <form
+          action=""
+          className="join-group-header-body-form"
+          style={{ display: Display ? "flex" : "none" }}
+          onClick={handleFormSubmit}
+        >
           <div className="input-body">
-            <label htmlFor="" className="group-label">Group name: </label>
-            <input type="text" name="groupname" value={Groupname} className="group-input" onChange={(e) => setGropname(e.target.value)} />
+            <label htmlFor="" className="group-label">
+              Group name:{" "}
+            </label>
+            <input
+              type="text"
+              name="groupname"
+              value={Groupname}
+              className="group-input"
+              onChange={(e) => setGropname(e.target.value)}
+            />
           </div>
           <div className="input-body-items">
-            <button type="submit" style={{ border: "none" }} onClick={handleFormSubmites}>
+            <button
+              type="submit"
+              style={{ border: "none" }}
+              onClick={handleFormSubmites}
+            >
               <img src={FilterImg} alt="Submit" className="group-btn" />
             </button>
-            <button type="submit" style={{ border: "none" }} onClick={handleFormClear}>
+            <button
+              type="submit"
+              style={{ border: "none" }}
+              onClick={handleFormClear}
+            >
               <img src={FilterClose} alt="Submit" className="group-close" />
             </button>
           </div>
@@ -344,20 +387,38 @@ const Group = () => {
 
       <div className="Slide">
         <div className="slide-menu">
-          <div className="sortBtn cursor" onClick={dubleSortMin}>{'<<'}</div>
-          <div className="sortBtn cursor" onClick={sortMin}> {'<'} </div>
+          <div className="sortBtn cursor" onClick={dubleSortMin}>
+            {"<<"}
+          </div>
+
+          <div className="sortBtn cursor" onClick={sortMin}>
+            {"<"}
+          </div>
+
           <li className="sortBasc sortBtn">{sort}</li>
-          <div className="sortBtn cursor" onClick={sortMax}> {'>'} </div>
-          <div className="sortBtn cursor" onClick={dubleSortMax}> {'>>'} </div>
+
+          <div className="sortBtn cursor" onClick={sortMax}>
+            {">"}
+          </div>
+
+          <div className="sortBtn cursor" onClick={dubleSortMax}>
+            {">>"}
+          </div>
         </div>
-        <div className="sortBtnList">
-          <select id="cars" onChange={SortBtnList}>
-            <option value={15} className="sortBtnList">15</option>
-            <option value={25} className="sortBtnList">25</option>
-            <option value={50} className="sortBtnList">50</option>
-          </select>
+
+        <div className="sortBtnList" onClick={toggleDropdown}>
+          <div className="select-selected">
+            {DubleList || 25}
+            {isOpen ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
+          </div>
+          <div className="select-items">
+            <div onClick={(event) => handleSelect(event, 25)}>25</div>
+            <div onClick={(event) => handleSelect(event, 100)}>100</div>
+            <div onClick={(event) => handleSelect(event, 200)}>200</div>
+          </div>
         </div>
-        <div className="sortBtn colorRed">All count : {list}</div>
+
+        <div className="sortBtn colorRed">All count: {list}</div>
       </div>
 
       <div className="join-group-section">
@@ -378,29 +439,76 @@ const Group = () => {
         <div className="modal-delete-body" id="modal-delete-body">
           <div className="formModalDelete" id="formModalDelete">
             <div className="formModalDelete-forms">
-              <div className="formModalDelete-title">Do you want to delete ?</div>
+              <div className="formModalDelete-title">
+                Do you want to delete ?
+              </div>
               <div className="formModalDelete-btn-body">
-                <button className="formModalDelete-btn-body-btn green" onClick={OffUpdateModal}>Cancel</button>
-                <button className="formModalDelete-btn-body-btn red" onClick={DeleteUser}>Delete</button>
+                <button
+                  className="formModalDelete-btn-body-btn green"
+                  onClick={OffUpdateModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="formModalDelete-btn-body-btn red"
+                  onClick={DeleteUser}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
-          <form action="" className="formModalBtn" onClick={(e) => modalFormClick(e)} id="formModalBtn">
+          <form
+            action=""
+            className="formModalBtn"
+            onClick={(e) => modalFormClick(e)}
+            id="formModalBtn"
+          >
             <h1>Update Group </h1>
 
             <div className="formModalBtn-inputs">
-              <label htmlFor="" className="formModalBtn-inputs-label">Group name : </label>
-              <input type="text" name="" id="" className="formModalBtn-inputs-item" value={Groupname} onChange={(e) => setGropname(e.target.value)} readOnly/>
+              <label htmlFor="" className="formModalBtn-inputs-label">
+                Group name :{" "}
+              </label>
+              <input
+                type="text"
+                name=""
+                id=""
+                className="formModalBtn-inputs-item"
+                value={Groupname}
+                onChange={(e) => setGropname(e.target.value)}
+                readOnly
+              />
             </div>
 
             <div className="formModalBtn-inputs">
-              <label htmlFor="" className="formModalBtn-inputs-label">Services : </label>
-              <Select className="user-select-modal" closeMenuOnSelect={true} defaultValue={selectedServiceList} value={selectedServiceList} isMulti options={userMap} onChange={(e) => handleStatusChangeUsers(e)} />
+              <label htmlFor="" className="formModalBtn-inputs-label">
+                Services :{" "}
+              </label>
+              <Select
+                className="user-select-modal"
+                closeMenuOnSelect={true}
+                defaultValue={selectedServiceList}
+                value={selectedServiceList}
+                isMulti
+                options={userMap}
+                onChange={(e) => handleStatusChangeUsers(e)}
+              />
             </div>
 
             <div className="formModalBtn-inputs-btn">
-              <button className="formModalBtn-inputs-btn-item-red" onClick={OffUpdateModal}>Cancel</button>
-              <button className="formModalBtn-inputs-btn-item-blue" onClick={sendUpdateModal}>Update</button>
+              <button
+                className="formModalBtn-inputs-btn-item-red"
+                onClick={OffUpdateModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="formModalBtn-inputs-btn-item-blue"
+                onClick={sendUpdateModal}
+              >
+                Update
+              </button>
             </div>
           </form>
         </div>

@@ -13,7 +13,7 @@
     gap: 30px;
     box-shadow: 0px 0px 8px #cecaca;
     margin-top: 20px;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 .add-service-input{
     width: 100%;
@@ -28,17 +28,22 @@
     gap: 10px;
 }
 .add-service-btn{
-    width: 50%;
+    width: 100%;
     padding: 10px 0px;
     border: none;
-    background-color: #1890ff;
+    background-color: #0c2b49;
     color: #fff;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+.add-service-btn:hover{
+    transform: scale(1.1);
 }
 .add-service-btn-body{
     width: 100%;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
     gap: 20px;
 }
