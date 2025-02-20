@@ -5,9 +5,6 @@ import Logo from "../img/section/logo1.ico";
 import Transfer from "../png/section/aside/transfer.png";
 import Home from "../png/section/aside/home.png";
 import AddUser from "../png/section/aside/addUser.png";
-import Eng from "../png/section/aside/Eng.png";
-import Rus from "../png/section/aside/rus.png";
-import Uzb from "../png/section/aside/uzb.png";
 import Group from "../png/section/aside/group.png";
 import Joingroup from "../png/section/aside/joingroup.png";
 import Service from "../png/section/aside/service.png";
@@ -15,9 +12,8 @@ import History from "../png/section/aside/history.png";
 import search from "../png/section/aside/search-black.png";
 import contracts from "../png/section/aside/document-files.png";
 
-
 // FontAwesome ikonkalarini import qilamiz
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle , FaSignOutAlt} from "react-icons/fa";
 
 class Layout extends Component {
   constructor(props) {
@@ -26,14 +22,11 @@ class Layout extends Component {
       searchText: "",
       hamburger: "flex",
       isDisplayed: false,
-      language: Eng,
       activeLink: window.location.pathname,
       profileDropdown: false, // Profile dropdownni boshqarish
       languageDropdown: false,
     };
-    this.RemoteLanguage = this.RemoteLanguage.bind(this);
     this.profileDropdownRef = React.createRef();
-    this.languageDropdownRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
   
@@ -79,20 +72,6 @@ class Layout extends Component {
     }));
   };
 
-  toggleLanguageDropdown = () => {
-    this.setState((prevState) => ({
-      languageDropdown: !prevState.languageDropdown,
-    }));
-  };
-
-  RemoteLanguage(e) {
-    const imgSrc = e.currentTarget.querySelector("img").src;
-    this.setState({
-      language: imgSrc,
-      isDisplayed: false,
-    });
-  }
-
   componentDidMount() {
     if (!window.localStorage.getItem("jwtToken")) {
       window.location.pathname = "/";
@@ -112,13 +91,6 @@ class Layout extends Component {
     ) {
       this.setState({ profileDropdown: false });
     }
-  
-    if (
-      this.languageDropdownRef &&
-      !this.languageDropdownRef.current.contains(e.target)
-    ) {
-      this.setState({ languageDropdown: false });
-    }
   }
   
 
@@ -134,7 +106,7 @@ class Layout extends Component {
   
 
   render() {
-    const { profileDropdown, activeLink, languageDropdown } =
+    const { profileDropdown, activeLink } =
       this.state;
 
     return (
@@ -156,7 +128,7 @@ class Layout extends Component {
 
             <div className="logo-item">
               <div className="logo-item-title">Swift Transfer</div>
-              <div className="logo-item-text">версии: 1.0.1</div>
+              <div className="logo-item-text">версии: 2.1.2</div>
             </div>
           </div>
 
@@ -369,33 +341,6 @@ class Layout extends Component {
 
             <div className="right-body">
 
-              <div className="language" ref={this.languageDropdownRef}>
-                <div className="language-always">
-                  <img
-                    src={this.state.language}
-                    alt="Language"
-                    className="language-icon"
-                    onClick={this.toggleLanguageDropdown}
-                  />
-                </div>
-                {languageDropdown && (
-                  <div className="language-dropdown">
-                    <li onClick={this.RemoteLanguage}>
-                      <img src={Eng} alt="" className="language-img" />
-                      <p>English</p>
-                    </li>
-                    <li onClick={this.RemoteLanguage}>
-                      <img src={Rus} alt="" className="language-img" />
-                      <p>Russian</p>
-                    </li>
-                    <li onClick={this.RemoteLanguage}>
-                      <img src={Uzb} alt="" className="language-img" />
-                      <p>Uzbek</p>
-                    </li>
-                  </div>
-                )}
-              </div>
-
               <div className="profile" ref={this.profileDropdownRef}>
                 <FaUserCircle
                   size={30}
@@ -424,15 +369,12 @@ class Layout extends Component {
                         </p>
                       </div>
                     </div>
-                    <Link to="/home/profile" className="dropdown-item">
-                      My Profile
-                    </Link>
                     <Link
                       to="/"
-                      className="dropdown-item logout"
+                      className="dropdown-item"
                       onClick={this.clearLocalstorage}
                     >
-                      Logout
+                      <FaSignOutAlt className="logout-icon" /> <p>Logout</p>
                     </Link>
                   </div>
                 )}
