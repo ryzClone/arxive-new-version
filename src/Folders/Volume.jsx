@@ -3,7 +3,7 @@ import "../style/Group.css";
 import { BASE_URL } from "../components/base_url";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa" 
 
-class Folders extends Component {
+class Volume extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,28 +66,18 @@ class Folders extends Component {
   }
 
   WithPermission() {
-    const name = localStorage.getItem('UserName');
-    const volume = localStorage.getItem('VolumeName');
-    const page = this.state.sort - 1;
-    const size = this.state.DubleList;
 
-    const data = {
-      name,
-      page,
-      size,
-      volume,
-    };
-
-    fetch(`${BASE_URL}/service/user/list`, {
-      method: 'POST',
+    fetch(`${BASE_URL}/home/volume`, {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${this.getAccessToken()}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
+        
         this.TableBackUser(data.data);
         this.setState({ list: data.data.count });
       })
@@ -122,7 +112,8 @@ class Folders extends Component {
 
       tr.addEventListener('click' , () => {
         localStorage.setItem("ServiceName",element.name);
-        window.location.pathname = '/home/subfolder'
+        localStorage.setItem("VolumeName",element.name);
+        window.location.pathname = '/home/folder'
       })
 
       Tbody.appendChild(tr);
@@ -164,7 +155,7 @@ class Folders extends Component {
     return (
       <div className="main read-group-margin">
         <div className="join-group-header-body">
-          <div className="join-group-header-title">Services</div>
+          <div className="join-group-header-title">Volume</div>
         </div>
 
         <div className="Slide">
@@ -221,4 +212,4 @@ class Folders extends Component {
   }
 }
 
-export default Folders;
+export default Volume;

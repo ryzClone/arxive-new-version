@@ -14,7 +14,7 @@ export default function Contracts() {
     const [responseDay, setResponseDay] = useState([]);
 
     const [isActivate, setISactivate] = useState(false);
-    const [isActiveKey, setIsActiveKey] = useState(false);
+    const [isActiveKey, setIsActiveKey] = useState(true);
     const [files, setFiles] = useState([]);
     const [key, setKey] = useState("");
 
@@ -70,9 +70,6 @@ export default function Contracts() {
             .catch((error) => console.error("Error:", error));
     };
 
-    useEffect(() => {
-        fetchYearData();
-    }, []);
 
     const handleFormSubmites = () => {
         const data = {
@@ -81,7 +78,7 @@ export default function Contracts() {
             dayName,
             key,
         };
-
+        
         if (isActiveKey && (yearName || monthName || dayName)) {
             setISactivate(true);
 
@@ -94,7 +91,7 @@ export default function Contracts() {
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
+                .then((data) => {                    
                     setFiles(data);
                     setISactivate(false);
                 })
@@ -105,6 +102,9 @@ export default function Contracts() {
         }
     };
 
+    useEffect(() => {
+        fetchYearData();
+    }, []);
 
 const handleDownload = (e) => {
     // `data` obyektini dinamik ravishda to'g'rilash

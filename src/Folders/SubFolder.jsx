@@ -66,6 +66,7 @@ class SubFolder extends Component {
 
   WithPermission() {
     const name = localStorage.getItem('ServiceName');
+    const volume = localStorage.getItem('VolumeName');
     const page = this.state.sort - 1;
     const size = this.state.DubleList;
 
@@ -73,6 +74,7 @@ class SubFolder extends Component {
       name,
       page,
       size,
+      volume,
     };
 
     fetch(`${BASE_URL}/home/folder`, {

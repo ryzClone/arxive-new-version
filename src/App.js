@@ -19,6 +19,7 @@ import Logs from './Folders/Logs';
 import Folders from './Folders/Folder';
 import Search from './components/Search';
 import Contracts from './components/Contracts';
+import Volume from './Folders/Volume';
 
 export default function App() {
   return (
@@ -26,8 +27,9 @@ export default function App() {
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/home" element={<Layout />}>
-        <Route index element={<Folders />} />
+        <Route index element={<Volume />} />
         <Route path="/home/readuser/" element={<ReadUser />} />
+        <Route path="/home/folder" element={<Folders />} />
         <Route path="/home/subfolder" element={<SubFolder />} />
         <Route path="/home/logs" element={<Logs />} />
         <Route path="/home/readuser/adduser" element={<Adduser />} />
